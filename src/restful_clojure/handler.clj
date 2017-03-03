@@ -14,4 +14,5 @@
 
 ;; Main Handler
 (def app
-  (wrap-log-info app-routes))
+    (-> app-routes
+        wrap-log-info))
