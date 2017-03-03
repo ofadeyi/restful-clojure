@@ -2,7 +2,16 @@
   (:require [compojure.core :refer :all]
             [compojure.route :as route]))
 
+;; Routes
 (defroutes app-routes
            (route/not-found "{\"message\":\"Page not found\"}"))
 
-(def app app-routes)
+;; Middleware
+(defn wrap-log-info [handler]
+  (fn [request]
+    (println request)
+    (handler request)))
+
+;; Main Handler
+(def app
+  (wrap-log-info app-routes))
